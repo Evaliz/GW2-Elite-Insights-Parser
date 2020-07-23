@@ -1,0 +1,80 @@
+﻿<div>
+    <div v-if="actor !== null">
+        <div v-if="isminion">
+            {{actor.name}} 造成了 {{round3(100*dmgdist.contributedDamage/dmgdist.totalDamage)}}% 的总伤害
+            {{istarget ? 'Target' :''}} dps
+        </div>
+        <div v-else>
+            {{actor.name}} 造成了 {{round3(100*dmgdist.contributedDamage/dmgdist.totalDamage)}}% 的 {{istarget ?
+            'Target' :''}} dps
+        </div>
+    </div>
+    <table class="table table-sm table-striped table-hover" cellspacing="0" width="100%" :id="tableid">
+        <thead>
+            <tr>
+                <th class="text-left">技能</th>
+                <th></th>
+                <th>伤害</th>
+                <th data-original-title="护盾伤害，包括总伤">护盾伤害</th>
+                <th>最小</th>
+                <th>平均</th>
+                <th>最大</th>
+                <th>次数</th>
+                <th>击中</th>
+                <th>单次释放命中</th>
+                <th>暴击</th>
+                <th>背刺</th>
+                <th>格挡</th>
+                <th>浪费</th>
+                <th>被救</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="row in dmgdist.distribution" :class="{condi: getSkill(row[0], row[1]).condi}">
+                <td class="text-left" :data-original-title="getSkill(row[0], row[1]).id">
+                    <img :src="getSkill(row[0], row[1]).icon" class="icon icon-hover"> {{getSkill(row[0],
+                    row[1]).name}}
+                </td>
+                <td>{{ round3(100*row[2]/dmgdist.contributedDamage) }}%</td>
+                <td :data-original-title="round2(row[2]/phase.durationS) +' dps'">{{ row[2] }}</td>
+                <td :data-original-title="round2(row[12]/phase.durationS) +' dps'">{{ row[12] }}</td>
+                <td>{{ Math.max(row[3],0) }}</td>
+                <td>{{ round(row[2]/row[6]) }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ !getSkill(row[0], row[1]).condi && row[5] ? row[5] : ''}}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{(!getSkill(row[0], row[1]).condi && row[6] && row[5]) ? round2(row[6]/row[5]) : ''}}</td>
+                <td :data-original-title="(!getSkill(row[0], row[1]).condi && row[6]) ? row[7] +' out of ' + row[6] + ' hits': false">
+                    {{(!getSkill(row[0], row[1]).condi && row[6]) ? round2(row[7]*100/row[6]) + '%' : ''}}
+                </td>
+                <td :data-original-title="(!getSkill(row[0], row[1]).condi && row[6]) ? row[8] +' out of ' + row[6] + ' hits': false">
+                    {{(!getSkill(row[0], row[1]).condi && row[6]) ? round2(row[8]*100/row[6]) + '%' : ''}}
+                </td>
+                <td :data-original-title="(!getSkill(row[0], row[1]).condi && row[6]) ? row[9] +' out of ' + row[6] + ' hits': false">
+                    {{(!getSkill(row[0], row[1]).condi && row[6]) ? round2(row[9]*100/row[6]) + '%' : ''}}
+                </td>
+                <td :data-original-title="row[10] ? round2(100.0 * row[10]/phase.durationS) + '% of the phase' : false">{{ row[10] ? row[10] + 's' : ''}}</td>
+                <td :data-original-title="row[11] ? round2(100.0 * row[11]/phase.durationS) + '% of the phase' : false">{{ row[11] ? row[11] + 's' : ''}}</td>
+            </tr>
+        </tbody>
+        <tfoot class="text-dark">
+            <tr>
+                <td class="text-left">总体</td>
+                <td></td>
+                <td :data-original-title="Math.round((dmgdist.contributedDamage ? dmgdist.contributedDamage : 0)/phase.durationS) +' dps'">{{dmgdist.contributedDamage ? dmgdist.contributedDamage : 0}}</td>
+                <td :data-original-title="Math.round((dmgdist.contributedShieldDamage ? dmgdist.contributedShieldDamage : 0)/phase.durationS) +' dps'">{{dmgdist.contributedShieldDamage ? dmgdist.contributedShieldDamage : 0}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

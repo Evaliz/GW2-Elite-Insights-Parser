@@ -1,0 +1,4 @@
+﻿Boons Tab
+	Personal Buff Uptimes
+Player Tab
+	Death Recap

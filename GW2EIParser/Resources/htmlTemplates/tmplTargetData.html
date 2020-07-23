@@ -1,0 +1,10 @@
+﻿<div class="d-flex flex-row justify-content-center align-items-center mb-2">
+    <img v-if="target.health > 0" src="https://wiki.guildwars2.com/images/b/be/Vitality.png" alt="Health" class="icon"
+        :data-original-title="'生命: ' + target.health">
+    <img v-if="target.tough > 0" src="https://wiki.guildwars2.com/images/1/12/Toughness.png" alt="Toughness" class="icon"
+        hbHeight :data-original-title="'坚韧: ' + target.tough">
+    <img v-if="target.hbWidth > 0" src="https://wiki.guildwars2.com/images/e/e7/1863930.png" alt="Hitbox Width" class="icon"
+        :data-original-title="'宽度: ' + target.hbWidth">
+    <img v-if="target.hbHeight > 0" src="https://wiki.guildwars2.com/images/5/57/1863934.png" alt="Hitbox Height" class="icon"
+        :data-original-title="'高度: ' + target.hbHeight">
+</div>

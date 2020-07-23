@@ -1,0 +1,42 @@
+﻿<div>
+    <div v-if="recaps">
+            <div v-for="index in phaseRecaps">
+                <h3 v-if="phaseRecaps.length > 1" class="text-center">
+                    死亡 #{{index + 1}}
+                </h3>
+                <div v-if="!recaps[index].toKill">
+                    <h3 class="text-center">Player was instantly killed after down</h3>
+                    <div class="text-center">
+                        承受了 {{data.totalDamage.down[index]}}
+                        伤害后倒地
+                        {{data.totalSeconds.down[index]}} 秒
+                    </div>
+                </div>
+                <div v-else-if="!recaps[index].toDown">
+                    <h3 class="text-center">Player was instantly killed</h3>
+                    <div class="text-center">
+                        死亡前于 {{data.totalSeconds.kill[index]}} 秒承受了 
+                        {{data.totalDamage.kill[index]}} 伤害
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="text-center">
+                        于 {{data.totalSeconds.down[index]}} 秒内
+                        承受 {{data.totalDamage.down[index]}}
+                        伤害并倒地
+                    </div>
+                    <div class="text-center">
+                        承受 {{data.totalDamage.kill[index]}}
+                        伤害， 在死亡前 {{data.totalSeconds.kill[index]}} 秒内
+                    </div>
+                </div>
+                <graph-component :id="'deathrecap-' + playerindex + '-' + index" :layout="data.layout" :data="[data.data[index]]"></graph-component>
+            </div>
+            <div v-show="phaseRecaps === null || phaseRecaps.length === 0">                
+                <h3 class="text-center">这阶段没死过</h3>
+            </div>
+    </div>
+    <div v-else>
+        <h3 class="text-center">这人救没死过</h3>
+    </div>
+</div>
