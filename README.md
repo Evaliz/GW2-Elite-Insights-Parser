@@ -83,4 +83,6 @@ GuildWars2EliteInsights.exe -c [config path] -ui [logs]
 ### 其他成员
 - Linus (arena maps/ icons for combat replay)
 
+#### 汉化
+- Evaliz（吟游神 https://space.bilibili.com/598623394）
 
