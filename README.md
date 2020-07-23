@@ -1,149 +1,74 @@
-## Contact
-For quick questions, discussions or other conversation that isn't an issue feel free to join an open discord channel: 
+## 作者联系方式
+我们的discord频道是
 https://discord.gg/dCDEPXx
+如果有问题可以随时来
 
-Our GitHub Page: https://baaron4.github.io/GW2-Elite-Insights-Parser/ 
+原作Github页面: https://baaron4.github.io/GW2-Elite-Insights-Parser/ 
 
-# GW2-Elite-Insights-Parser
-## Set Up
+# 激战2 Elite-Insights-Parser
+## 下载
 
-1. Go to Code tab
+1. 点击 Code 栏
 
-2. Go to Release section
+2. 找到 Release 分支
 
-3. Download the GW2EI.zip file
+3. 下载 GW2EI.zip
 
-4. Extract all files anywhere you like
+4. 解压
 
-5. Open GW2EI.exe (feel free to make a shortcut and move to desktop)
+5. 打开 GW2EI.exe (可自行添加桌面快捷方式)
 
-6. gg
+6. OJBK
 
-NOTE: ArcDPS log files are currently located within "C:\Users\<USERNAME>\Documents\Guild Wars 2\addons\arcdps\arcdps.cbtlogs"
-## Usage
+注意: ArcDPS 的日志文件目前默认存放于 "C:\Users\<USERNAME>\Documents\Guild Wars 2\addons\arcdps\arcdps.cbtlogs"
+## 使用
 ![program](https://user-images.githubusercontent.com/30677999/38950127-284f2d10-430a-11e8-937b-67a325a2a296.PNG)
 
-1. Drag and drop 1 or multiple .evtc, .evtc.zip or .zevtc files into program
+1. 拖拽1个或多个 .evtc, .evtc.zip 或 .zevtc 文件至对话框中
 
-2. Click parse
+2. 点击解析
 
-3. When done the .html will be located in the same location as the evtc, or at the desired output location, as "samename_boss_result.html"
+3. 解析完成后生成的HTML文件会在你的evtc目录下, 也可以指定存放目录。 默认的文件名差不多是 "samename_boss_result.html" 这样。
 
 ![htmldisplay](https://user-images.githubusercontent.com/30677999/38950250-816c559e-430a-11e8-8159-1cf073a5fa44.PNG)
 
-## Console Parsing
+## 控制台解析
 
 https://github.com/baaron4/GW2-Elite-Insights-Parser/blob/24df62abfec74446a07816524a98b9d97d87d966/LuckParser/Program.cs#L15-L22
 
 ![how to](https://user-images.githubusercontent.com/30677999/40148954-6ec9215a-5936-11e8-94ad-d2520e7c4539.PNG)
 
-If you would like to have your logs parsed without the GUI pass the file location of each evtc file as a string. 
+以防万一还是要说一下，如果你抛弃了GUI想使用控制台解析日志文件的话 
 
-Settings can be configured using .conf files (see Settings/sample.conf for an example). You can then use it with -c:
+可以通过.conf 文件来进行设置 (具体可以查看 Settings/sample.conf). 之后你可以使用 -c 来控制解析:
 
 ```
 GuildWars2EliteInsights.exe -c [config path] [logs]
 ```
 
-To disable windows-specific commandline magic you can use -p:
+你还可以使用 -p:
 
 ```
 GuildWars2EliteInsights.exe -p [logs]
 ```
 
-You can start the application in GUI mode using -ui option:
+你可以使用 -ui 选项呼出GUI界面:
 ```
 GuildWars2EliteInsights.exe -c [config path] -ui [logs]
 ```
 
-Note it may take some time for each file to parse and they will not be ready to open the moment they are created.
+请注意解析并不是瞬间完成的。
 
-## Settings
+## 设置
 
-### Output Settings
+鉴于能跑到这里来看这个程序的各位应该都有相应的英文能力和打码水平，这里就不翻译了。
 
--__SaveAtOut__: if true, the generated files will be in the same location as the source file.
+## JSON 文件
 
--__OutLocation__: secondary output path, will be used if SaveAtOut is false.
+你可以在 [here] 这里找到JSON文件 (https://baaron4.github.io/GW2-Elite-Insights-Parser/Json/index.html)
 
--__Anonymous__: if true, player character and account names will be obfuscated.
-
--__AddPoVProf__: if true, the profession of the pov will be added to the generated files' name.
-
--__AddDuration__: if true, the duration (truncated to seconds) will be added to the generated files' name.
-
-### Parser Settings
-
--__MultiThreaded__: if true, multiple threads will be used for parsing a single log.
-
--__ParseMultipleLogs__: if true, multiple logs will be parsed in parallel.
-
--__SaveOutTrace__: if true, log files will be generated.
-
--__SkipFailedTries__: if true, failed encounters will not be parsed.
-
-### GUI only Parser Settings
-
--__AutoAdd__: if true, EI will automatically add logs that appear in AutoAddPath.
-
--__AutoAddPath__: the path to listen to for automatic additions.
-
--__AutoParse__: if true, every added log file will be automatically processed.
-
-### Encounter Settings
-
--__ParsePhases__: if true, phases will be parsed.
-
--__ParseCombatReplay__: if true, combat replay will be computed.
-
--__ComputeDamageModifiers__: if true, damage modifiers will be computed ( forcefully disabled on WvW logs for now).
-
-### HTML settings
-
--__SaveOutHTML__: if true, html logs will be generated.
-
--__HtmlExternalScripts__: if true, css and js files will be separated from the html.
-
--__LightTheme__: if true, the html will use a light theme by default. Please note that the theme can be dynamically changed on the html post generation.
-
-### CSV Settings
-
--__SaveOutCSV__: if true, csv logs will be generated.
-
-### Raw Format Settings
-
--__SaveOutJSON__: if true, json logs will be generated.
-
--__IndentJSON__: if true, generated json logs will be indented instead of being on a single line.
-
--__SaveOutXML__: if true, xml logs will be generated.
-
--__IndentXML__: if true, generated xml logs will be indented instead of being on a single line.
-
--__CompressRaw__: if true, xml and json logs will be compressed.
-
--__RawTimelineArrays__: if true, xml and json logs will contain graph related data.
-
-### Upload Settings
-
--__UploadToDPSReports__: if true, the log will be uploaded to dps.reports using EI as generator.
-
--__UploadToDPSReportsRH__: if true, the log will be uploaded to dps.reports using RH as generator.
-
--__UploadToRaidar__: if true, the log will be uploaded to raidar (not used).
-
--__WebhookURL__: Webhook URL to send an embed or simple message to.
-
--__SendEmbedToWebhook__: if true, the Webhook URL will receive a small embed containing meta data + dps.reports link. (Does not work with ParseMultipleLogs for now)
-
--__SendSimpleMessageToWebhook__: if true, only the dps.reports link will be sent to the webhook.
-
-## JSON Documentation
-
-The Json documentation can be found [here](https://baaron4.github.io/GW2-Elite-Insights-Parser/Json/index.html)
-
-## Contributors
-### Developers
+## 贡献者
+### 开发人员
 - baaron4
 - EliphasNUIT
 - cordbleibaum
@@ -155,7 +80,7 @@ The Json documentation can be found [here](https://baaron4.github.io/GW2-Elite-I
 - Stonos
 - Hobinjk
 
-### Other stuffs
+### 其他成员
 - Linus (arena maps/ icons for combat replay)
 
 
